@@ -10,10 +10,10 @@ const getCount = async () => {
 const incrementCount = async () => {
     // Update the count and retrieve the updated value
     await knex('count').where('id', 1).increment('value', 1);
-
-    // Get the updated count
-    const result = await knex('count').where('id', 1).select('value');
-    return result[0]?.value; // Return the updated value
 };
+
+const resetCount = async () => {
+    await knex('count').where('id', 1).update('value', 0);
+}
 
 module.exports = { getCount, incrementCount };
