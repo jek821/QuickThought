@@ -18,7 +18,7 @@ const useCount = () => {
     // Increment the count in the database
     const incrementCount = async () => {
         console.log('Button clicked');
-        const response = await fetch('/api/count', { method: 'POST' }); // Correct relative URL for frontend
+        const response = await fetch('/api/count', { method: 'POST' });
         const data = await response.json();
         setCount(data.count);
     };
