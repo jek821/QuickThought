@@ -1,4 +1,4 @@
-import { incrementCount, getCount } from '../../models/count';
+import { incrementCount, getCount, resetCount } from '../../models/count';
 
 export default async function handler(req, res) {
     try {
@@ -9,7 +9,11 @@ export default async function handler(req, res) {
             await incrementCount();
             const count = await getCount(); // Now using the GET logic to return updated value
             res.status(200).json({ count });
-        } else {
+        } else if (req.method === 'DELETE') {
+            await resetCount();
+            res.status(200).json({ message: 'Count reset' });
+        }
+        else {
             res.status(405).json({ message: 'Method Not Allowed' });
         }
     } catch (error) {

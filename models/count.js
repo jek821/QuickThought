@@ -12,8 +12,10 @@ const incrementCount = async () => {
     await knex('count').where('id', 1).increment('value', 1);
 };
 
+// Function to reset the count to 0 
 const resetCount = async () => {
     await knex('count').where('id', 1).update('value', 0);
-}
+};
 
-module.exports = { getCount, incrementCount };
+
+module.exports = { getCount, incrementCount, resetCount };

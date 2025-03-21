@@ -6,12 +6,13 @@ import Button from '../src/components/button';
 import './index.module.css'; // Keep the CSS import
 
 const Home = () => {
-    const { count, incrementCount } = useCount();
+    const { count, incrementCount, getCount, resetCount } = useCount();
 
     return (
         <div>
             <CounterDisplay count={count} />
             <Button onClick={incrementCount}>Increment Count</Button>
+            <Button onClick={resetCount}>Reset Count</Button>
 
             <nav>
                 <Link href="/about">Go to About Page</Link>

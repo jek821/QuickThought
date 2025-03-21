@@ -6,24 +6,30 @@ const useCount = () => {
 
     // Fetch the count when the component loads
     useEffect(() => {
-        const fetchCount = async () => {
-            const response = await fetch('/api/count'); // Correct relative URL for frontend
-            const data = await response.json();
-            setCount(data.count);
-        };
-
-        fetchCount();
+        getCount();
     }, []);
 
-    // Increment the count in the database
-    const incrementCount = async () => {
-        console.log('Button clicked');
-        const response = await fetch('/api/count', { method: 'POST' });
+    // Get the count from the databse
+    const getCount = async () => {
+        const response = await fetch('/api/count', { method: 'GET' });
         const data = await response.json();
         setCount(data.count);
     };
 
-    return { count, incrementCount };
+    // Increment the count in the database
+    const incrementCount = async () => {
+        console.log('Button clicked');
+        await fetch('/api/count', { method: 'POST' });
+        await getCount();
+    };
+
+    const resetCount = async () => {
+        console.log("Reset button clicked");
+        await fetch('/api/count', { method: 'DELETE' });
+        await getCount();
+
+    };
+    return { count, incrementCount, resetCount, getCount };
 };
 
 export default useCount;
